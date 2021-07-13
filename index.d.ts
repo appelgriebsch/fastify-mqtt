@@ -23,7 +23,7 @@ declare module 'fastify' {
 
 // fastify-plugin automatically adds named export, so be sure to add also this type
 // the variable name is derived from `options.name` property if `module.exports.myPlugin` is missing
-export const mqttPlugin: FastifyPlugin<MqttClientOptions>;
+export const fastifyMqtt: FastifyPlugin<MqttClientOptions>;
 
 // fastify-plugin automatically adds `.default` property to the exported plugin. See the note below
-export default mqttPlugin;
+export default fastifyMqtt;

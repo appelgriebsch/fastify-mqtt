@@ -14,7 +14,7 @@ import fs from "fs";
  *
  * @param {fastify.FastifyInstance} fastify
  * @param {MqttClientOptions} options
- * @param {CallableFunction} next
+ * @param {Function} next
  */
 function fastifyMqtt(fastify, options, next) {
 
@@ -51,7 +51,7 @@ function fastifyMqtt(fastify, options, next) {
 
       fastify.addHook('onClose', (instance, done) => {
         fastify.log.info(`Disconnect from MQTT broker at ${broker_url}`);
-        instance.mqtt.end().then(done);
+        instance.mqtt.end().then(() => done());
       });
 
       if (!fastify.mqtt) {
@@ -60,8 +60,7 @@ function fastifyMqtt(fastify, options, next) {
 
       fastify.log.info(`Connected to MQTT broker at ${broker_url}`);
       next();
-    })
-    .catch((err) => {
+    }).catch((err) => {
       fastify.log.error(err);
       next(err);
     });
