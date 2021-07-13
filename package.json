@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "type": "module",
   "scripts": {
-    "test": "tap test.js"
+    "test": "tsd && tap test.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "fastify": "^3.18.0",
-    "tap": "^15.0.9"
+    "tap": "^15.0.9",
+    "tsd": "^0.17.0"
   }
 }

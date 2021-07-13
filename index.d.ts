@@ -1,18 +1,34 @@
 import { FastifyPlugin } from 'fastify';
 import { AsyncMqttClient } from 'async-mqtt';
 
-export interface MqttClientOptions {
+/**
+ * options to connect to broker via mqtt://
+ */
+interface MqttConnectionOption {
   host: string,
   port: number,
   keepalive: number,
   clientId: string,
-  tls: boolean,
-  rejectUnauthorized: boolean,
+  tls: false
+} 
+
+/**
+ * options to connect to broker via mqtts://
+ */
+interface MqttsConnectionOption {
+  host: string,
+  port: number,
+  keepalive: number,
+  clientId: string,
+  tls: true,
+  rejectUnauthorized?: boolean,
   cert: string,
   key: string,
-  passphrase: string,
-  ca: string[]
+  passphrase?: string,
+  ca?: string[]
 }
+
+export type MqttClientOptions = MqttConnectionOption | MqttsConnectionOption;
 
 // Most importantly, use declaration merging to add the custom property to the Fastify type system
 declare module 'fastify' {
